@@ -1,29 +1,31 @@
-window._ = require('lodash');
-
-/**
- * We'll load the axios HTTP library which allows us to easily issue requests
- * to our Laravel back-end. This library automatically handles sending the
- * CSRF token as a header based on the value of the "XSRF" token cookie.
- */
-
-window.axios = require('axios');
-
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-
 import { App, plugin } from '@inertiajs/inertia-vue'
 import Vue from 'vue'
 import Buefy from 'buefy'
 import 'buefy/dist/buefy.css'
 
+import route from 'ziggy-js';
+import { Ziggy } from 'ziggy-js';
+
+Vue.mixin({
+    methods: {
+        route: (name, params, absolute, config = Ziggy) => route(name, params, absolute, config),
+    },
+});
+Vue.prototype.$route = (...args) => route(...args).url();
+
 Vue.use(Buefy, plugin)
 const el = document.getElementById('app')
 
+import Layout from './Layout/default'
 new Vue({
     render: h => h(App, {
         props: {
             initialPage: JSON.parse(el.dataset.page),
-            resolveComponent: name => require(`./Pages/${name}`).default,
+            resolveComponent: name => import(`./Pages/${name}`)
+                .then(({ default: page }) => {
+                    page.layout = page.layout === undefined ? Layout : page.layout
+                    return page
+                }),
         },
     }),
 }).$mount(el)
-
