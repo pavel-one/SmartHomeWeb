@@ -1,0 +1,3 @@
+# use .prod.env for prod || .local.env for local
+
+*.prod.env
