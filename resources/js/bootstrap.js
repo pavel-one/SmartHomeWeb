@@ -4,7 +4,10 @@ import Buefy from 'buefy'
 import 'buefy/dist/buefy.css'
 
 import route from 'ziggy-js';
-import { Ziggy } from 'ziggy-js';
+
+Vue.use(plugin)
+Vue.use(Buefy)
+const el = document.getElementById('app')
 
 Vue.mixin({
     methods: {
@@ -12,9 +15,6 @@ Vue.mixin({
     },
 });
 Vue.prototype.$route = (...args) => route(...args).url();
-
-Vue.use(Buefy, plugin)
-const el = document.getElementById('app')
 
 import Layout from './Layout/default'
 new Vue({

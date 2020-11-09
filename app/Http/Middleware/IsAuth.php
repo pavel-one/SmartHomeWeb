@@ -20,6 +20,6 @@ class IsAuth
             return $next($request);
         }
 
-        return redirect()->route('index');
+        return \Redirect::route('index')->withErrors(['Вам необходимо авторизоваться']);
     }
 }
