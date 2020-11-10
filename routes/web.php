@@ -19,6 +19,8 @@ Route::prefix('auth')
         Route::post('auth', [AuthController::class, 'auth'])->name('auth');
     });
 
+Route::get('auth/logout', [AuthController::class, 'logout'])->name('auth.logout');
+
 Route::middleware(IsAuth::class)
     ->prefix('/dashboard')
     ->group(function () {

@@ -23,6 +23,12 @@ class AuthController extends Controller
         ]);
     }
 
+    public function logout()
+    {
+        \Auth::logout();
+        return redirect()->route('index');
+    }
+
     public function auth(Request $request)
     {
         $request->validate([

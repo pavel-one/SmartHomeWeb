@@ -9,6 +9,8 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        return Inertia::render('dashboard-index');
+        return Inertia::render('dashboard-index', [
+            'title' => 'Личный кабинет'
+        ]);
     }
 }

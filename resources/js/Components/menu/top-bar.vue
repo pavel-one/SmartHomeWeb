@@ -17,12 +17,19 @@
         <template slot="end">
             <b-navbar-item tag="div">
                 <div class="buttons">
-                    <inertia-link :href="route('index')" class="button is-primary">
-                        <strong>Войти</strong>
-                    </inertia-link>
-                    <inertia-link :href="route('auth.register')" class="button is-light">
-                        <strong>Регистрация</strong>
-                    </inertia-link>
+                    <div v-if="this.$page.props.user">
+                        <inertia-link :href="route('dashboard.index')" class="button is-primary">
+                            <strong>{{this.$page.props.user.name}}</strong>
+                        </inertia-link>
+                        <inertia-link :href="route('auth.logout')" class="button is-light">
+                            <strong>Выход</strong>
+                        </inertia-link>
+                    </div>
+                    <div v-else>
+                        <inertia-link :href="route('auth.index')" class="button is-primary">
+                            <strong>Войти</strong>
+                        </inertia-link>
+                    </div>
                 </div>
             </b-navbar-item>
         </template>
@@ -31,6 +38,7 @@
 
 <script>
 export default {
+    props: ['user'],
     data() {
         return {
         }

@@ -5,7 +5,6 @@
             <h2 class="subtitle">Авторизуйтесь, чтобы воспользоваться панелью управления</h2>
         </template>
         <h1 class="title">Вход</h1>
-        {{user}}
         <div class="columns">
             <form @submit.prevent="submit" class="column" >
                 <b-field :type="errors.email ? 'is-danger' : ''" :message="errors.email" label-position="on-border" label="Email">
@@ -40,7 +39,7 @@ import layout from '../Layout/default'
 
 export default {
     components: {layout},
-    props: ['title', 'errors', 'user'],
+    props: ['title', 'errors'],
     metaInfo() {
         return {
             title: this.title
