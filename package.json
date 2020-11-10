@@ -25,6 +25,7 @@
         "@inertiajs/progress": "^0.2.2",
         "buefy": "^0.9.4",
         "vue": "^2.6.12",
+        "vue-meta": "^2.4.0",
         "ziggy-js": "^1.0.0"
     }
 }

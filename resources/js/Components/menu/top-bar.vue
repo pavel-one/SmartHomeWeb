@@ -6,10 +6,10 @@
             </b-navbar-item>
         </template>
         <template slot="start">
-            <b-navbar-item  :active="true" tag="inertia-link" :href="route('index')">
+            <b-navbar-item  :active="false" tag="inertia-link" :href="route('index')">
                 Главная
             </b-navbar-item>
-            <b-navbar-item :active="route().has('dashboard.index')" tag="inertia-link" :href="route('dashboard.index')">
+            <b-navbar-item tag="inertia-link" :href="route('dashboard.index')">
                 Панель управления
             </b-navbar-item>
         </template>
@@ -17,10 +17,10 @@
         <template slot="end">
             <b-navbar-item tag="div">
                 <div class="buttons">
-                    <inertia-link :href="'#'" class="button is-primary">
+                    <inertia-link :href="route('index')" class="button is-primary">
                         <strong>Войти</strong>
                     </inertia-link>
-                    <inertia-link :href="'#'" class="button is-light">
+                    <inertia-link :href="route('auth.register')" class="button is-light">
                         <strong>Регистрация</strong>
                     </inertia-link>
                 </div>

@@ -1,8 +1,17 @@
 <template>
     <div>
         <top-bar></top-bar>
+        <section v-if="hero" class="hero is-primary">
+            <div class="hero-body">
+                <div class="container">
+                    <slot name="hero"></slot>
+                </div>
+            </div>
+        </section>
         <div class="container">
-            <slot></slot>
+            <div :style="cssContainer">
+                <slot></slot>
+            </div>
         </div>
     </div>
 </template>
@@ -13,6 +22,13 @@ import topBar from '../Components/menu/top-bar'
 
 export default {
     components: {topBar},
+    props: {
+        hero: {
+            type: Boolean,
+            default: true
+        },
+        cssContainer: Object
+    },
     mounted() {
     },
     updated() {
