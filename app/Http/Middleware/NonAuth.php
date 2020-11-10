@@ -17,7 +17,7 @@ class NonAuth
     public function handle(Request $request, Closure $next)
     {
         if ($request->user()) {
-            return redirect()->route('dashboard.index');
+            return \Redirect::route('dashboard.index')->withErrors(['Вы уже авторизованы']);
         }
 
         return $next($request);

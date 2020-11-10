@@ -7,9 +7,17 @@ use App\Http\Middleware\IsAuth;
 use App\Http\Middleware\NonAuth;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [AuthController::class, 'login'])->name('index');
-Route::get('register', [AuthController::class, 'register'])->name('auth.register');
-Route::post('auth', [AuthController::class, 'auth'])->name('auth');
+Route::get('/', function () {
+    return redirect()->route('auth.index');
+})->name('index');
+
+Route::prefix('auth')
+    ->middleware(NonAuth::class)
+    ->group(function () {
+        Route::get('/', [AuthController::class, 'login'])->name('auth.index');
+        Route::get('register', [AuthController::class, 'register'])->name('auth.register');
+        Route::post('auth', [AuthController::class, 'auth'])->name('auth');
+    });
 
 Route::middleware(IsAuth::class)
     ->prefix('/dashboard')
