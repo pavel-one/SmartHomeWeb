@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DevicesController;
 use App\Http\Controllers\SiteController;
 use App\Http\Middleware\IsAuth;
 use App\Http\Middleware\NonAuth;
@@ -29,8 +30,6 @@ Route::middleware(IsAuth::class)->prefix('/dashboard')->group(function () {
     Route::get('token', [DashboardController::class, 'token'])->name('dashboard.token');
 
     Route::prefix('devices')->group(function () {
-        Route::get('/', function () {
-            return 'test';
-        })->name('dashboard.devices');
+        Route::get('/', [DevicesController::class, 'index'])->name('dashboard.devices');
     });
 });
