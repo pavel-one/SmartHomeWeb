@@ -40,7 +40,7 @@
 
             <div class="buttons">
                 <b-button native-type="submit" type="is-primary">Сохранить</b-button>
-                <b-button native-type="submit" type="is-danger">Удалить профиль</b-button>
+                <b-button @click="remove" type="is-danger">Удалить профиль</b-button>
             </div>
         </form>
     </layout>
@@ -69,6 +69,15 @@ export default {
         }
     },
     methods: {
+        remove: function () {
+            this.$buefy.dialog.confirm({
+                message: 'Внимание! Вы точно хотите удалить свой профиль и все связанные с ним данные? После подтверждения, восстановить их будет невозможно!',
+                onConfirm: () => {
+                    this.$inertia.delete(this.route('dashboard.delete'));
+                },
+                cancelText: 'Закрыть'
+            })
+        },
         submit: function () {
             if (this.form.password) {
                 this.$buefy.dialog.confirm({

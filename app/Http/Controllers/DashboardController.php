@@ -37,6 +37,14 @@ class DashboardController extends Controller
         ]);
     }
 
+    public function delete()
+    {
+        /** @var User $user */
+        $user = \Auth::user();
+        \Auth::logout();
+        $user->delete();
+    }
+
     public function update(Request $request)
     {
         /** @var User $user */
