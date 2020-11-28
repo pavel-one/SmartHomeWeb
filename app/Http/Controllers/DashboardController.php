@@ -43,6 +43,8 @@ class DashboardController extends Controller
         $user = $request->user();
         \Auth::logout();
         $user->delete();
+
+        return back();
     }
 
     public function update(Request $request)
