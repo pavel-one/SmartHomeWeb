@@ -6,5 +6,8 @@ use Illuminate\Http\Request;
 
 class DevicesController extends Controller
 {
-    //
+    public function index(Request $request)
+    {
+
+    }
 }
