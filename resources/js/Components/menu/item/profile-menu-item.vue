@@ -1,0 +1,39 @@
+<template>
+    <div class="column">
+        <inertia-link :href="link">
+            <div class="box">
+                <article class="media">
+                    <div class="media-left">
+                        <b-icon :icon="icon" size="is-large"></b-icon>
+                    </div>
+                    <div class="media-content">
+                        <div class="content">
+                            <p>
+                                <strong>{{ name }}</strong>
+                                <br>
+                                {{ description }}
+                            </p>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </inertia-link>
+    </div>
+</template>
+
+<script>
+export default {
+    props: ['name', 'link', 'icon', 'description']
+}
+</script>
+
+<style lang="scss" scoped>
+.box {
+    transition: .25s;
+    &:hover {
+        background: #7957d5;
+        color: #e2e8f0;
+        box-shadow: 0 0.25em 0.25em -0.125em rgba(10, 10, 10, 0.1), 0 0px 0 1px rgba(10, 10, 10, 0.02);
+    }
+}
+</style>

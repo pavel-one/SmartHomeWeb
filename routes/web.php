@@ -21,8 +21,15 @@ Route::prefix('auth')
 
 Route::get('auth/logout', [AuthController::class, 'logout'])->name('auth.logout');
 
-Route::middleware(IsAuth::class)
-    ->prefix('/dashboard')
-    ->group(function () {
-        Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
+Route::middleware(IsAuth::class)->prefix('/dashboard')->group(function () {
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
+    Route::get('profile', [DashboardController::class, 'profile'])->name('dashboard.profile');
+    Route::post('profile', [DashboardController::class, 'update'])->name('dashboard.update');
+    Route::get('token', [DashboardController::class, 'token'])->name('dashboard.token');
+
+    Route::prefix('devices')->group(function () {
+        Route::get('/', function () {
+            return 'test';
+        })->name('dashboard.devices');
     });
+});

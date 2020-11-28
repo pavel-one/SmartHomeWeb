@@ -25,7 +25,7 @@ export default {
     props: {
         hero: {
             type: Boolean,
-            default: true
+            default: false
         },
         cssContainer: Object
     },

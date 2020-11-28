@@ -1,8 +1,10 @@
 import { App, plugin } from '@inertiajs/inertia-vue'
+import { InertiaProgress } from '@inertiajs/progress'
 import Vue from 'vue'
 import VueMeta from 'vue-meta'
 import Buefy from 'buefy'
 import 'buefy/dist/buefy.css'
+const axios = require('axios').default;
 
 import route from 'ziggy-js';
 
@@ -12,6 +14,7 @@ Vue.use(VueMeta, {
 })
 Vue.use(plugin)
 Vue.use(Buefy)
+InertiaProgress.init()
 const el = document.getElementById('app')
 
 Vue.mixin({
@@ -20,6 +23,7 @@ Vue.mixin({
     },
 });
 Vue.prototype.$route = (...args) => route(...args).url();
+Vue.prototype.$http = axios;
 
 import Layout from './Layout/default'
 new Vue({

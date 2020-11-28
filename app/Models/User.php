@@ -35,6 +35,14 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
+    public static function rules()
+    {
+        return [
+            'email' => ['required', 'max:30'],
+            'password' => ['required', 'max:30'],
+        ];
+    }
+
     /**
      * The attributes that are mass assignable.
      *
@@ -42,6 +50,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'token',
         'email',
         'password',
     ];
