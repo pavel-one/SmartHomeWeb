@@ -24,6 +24,10 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|UserDevice whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|UserDevice whereUserId($value)
  * @mixin \Eloquent
+ * @property string|null $mac
+ * @property string|null $signal
+ * @method static \Illuminate\Database\Eloquent\Builder|UserDevice whereMac($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|UserDevice whereSignal($value)
  */
 class UserDevice extends Model
 {
