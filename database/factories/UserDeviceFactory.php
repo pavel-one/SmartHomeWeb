@@ -21,11 +21,21 @@ class UserDeviceFactory extends Factory
      */
     public function definition()
     {
+        $types = UserDevice::getKeys();
+
+        $names = [
+            UserDevice::TYPE_HEATER => 'Мой обогреватель',
+            UserDevice::TYPE_SWITCHER => 'Свет на компьютерном столе',
+        ];
+
+        $type = $types[rand(0, count($types) - 1)];
+
         return [
             'user_id' => 1,
-            'name' => $this->faker->word,
+            'name' => $names[$type],
             'online' => $this->faker->boolean,
             'mac' => $this->faker->macAddress,
+            'type' => $type,
             'signal' => mt_rand(1, 20) / 10
         ];
     }

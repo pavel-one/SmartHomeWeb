@@ -20,12 +20,12 @@
         "vue-template-compiler": "^2.6.12"
     },
     "dependencies": {
-        "@inertiajs/inertia": "^0.6.1",
-        "@inertiajs/inertia-vue": "^0.4.1",
+        "@inertiajs/inertia": "^0.6.3",
+        "@inertiajs/inertia-vue": "^0.4.2",
         "@inertiajs/progress": "^0.2.2",
         "buefy": "^0.9.4",
         "vue": "^2.6.12",
         "vue-meta": "^2.4.0",
-        "ziggy-js": "^1.0.0"
+        "ziggy-js": "^1.0.2"
     }
 }

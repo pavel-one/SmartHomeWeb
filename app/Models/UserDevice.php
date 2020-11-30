@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Casts\UserDeviceType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -28,8 +29,33 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $signal
  * @method static \Illuminate\Database\Eloquent\Builder|UserDevice whereMac($value)
  * @method static \Illuminate\Database\Eloquent\Builder|UserDevice whereSignal($value)
+ * @property int $type
+ * @method static \Illuminate\Database\Eloquent\Builder|UserDevice whereType($value)
  */
 class UserDevice extends Model
 {
     use HasFactory;
+
+    protected $casts = [
+        'type' => UserDeviceType::class
+    ];
+
+    const TYPE_HEATER = 1;
+    const TYPE_SWITCHER = 2;
+
+    public static function getNames()
+    {
+        return [
+            self::TYPE_HEATER => 'Тепловентилятор',
+            self::TYPE_SWITCHER => 'Выключатель',
+        ];
+    }
+
+    public static function getKeys()
+    {
+        return [
+            self::TYPE_HEATER,
+            self::TYPE_SWITCHER,
+        ];
+    }
 }
