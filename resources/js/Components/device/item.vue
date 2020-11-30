@@ -3,7 +3,9 @@
         <inertia-link :href="route('dashboard.device', {device: device.id})" as="div">
             <div class="device-content">
                 <div class="left">
-                    <div class="icon"><img :src="getIcon(device.type)" :alt="device.name"></div>
+                    <div class="icon">
+                        <img :src="getIcon(device.type)" :alt="device.name">
+                    </div>
                 </div>
                 <div class="right">
                     <div class="name">{{ device.name }}</div>

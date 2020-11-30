@@ -25,6 +25,8 @@ class DevicesController extends Controller
 
     public function show(UserDevice $device)
     {
-        return $device;
+        return Inertia::render('device', [
+            'device' => $device
+        ]);
     }
 }
