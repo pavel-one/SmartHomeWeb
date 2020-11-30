@@ -8,7 +8,7 @@
             <div class="level-item has-text-centered">
                 <div>
                     <p class="heading">Устройств</p>
-                    <p class="title">5</p>
+                    <p class="title">{{ device_count }}</p>
                 </div>
             </div>
             <div class="level-item has-text-centered">
@@ -27,7 +27,7 @@ import layout from '../Layout/default'
 import profileMenu from '../Components/menu/profile-menu'
 
 export default {
-    props: ['title'],
+    props: ['title', 'device_count'],
     components: {layout, profileMenu},
     metaInfo() {
         return {

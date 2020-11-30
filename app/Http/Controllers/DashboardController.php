@@ -9,10 +9,17 @@ use Inertia\Inertia;
 
 class DashboardController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        /** @var User $user */
+        $user = $request->user();
+        $count = \Cache::remember('count_devices_'.$user->id, 60, function () use ($user) {
+            return $user->devices()->count();
+        });
+
         return Inertia::render('dashboard-index', [
-            'title' => 'Личный кабинет'
+            'title' => 'Личный кабинет',
+            'device_count' => $count
         ]);
     }
 
