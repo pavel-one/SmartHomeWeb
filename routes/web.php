@@ -31,5 +31,10 @@ Route::middleware(IsAuth::class)->prefix('/dashboard')->group(function () {
 
     Route::prefix('devices')->group(function () {
         Route::get('/', [DevicesController::class, 'index'])->name('dashboard.devices');
+        Route::get('get', [DevicesController::class, 'devices'])
+            ->middleware('throttle:60')
+            ->name('dashboard.api.devices');
+        Route::get('{device}', [DevicesController::class, 'show'])
+            ->name('dashboard.device');
     });
 });

@@ -1,22 +1,24 @@
 <template>
     <div class="device-item box hover-box">
-        <div class="device-content">
-            <div class="left">
-                <div class="icon"><img :src="getIcon(device.type)" :alt="device.name"></div>
+        <inertia-link :href="route('dashboard.device', {device: device.id})" as="div">
+            <div class="device-content">
+                <div class="left">
+                    <div class="icon"><img :src="getIcon(device.type)" :alt="device.name"></div>
+                </div>
+                <div class="right">
+                    <div class="name">{{ device.name }}</div>
+                    <div class="type">{{ device.type }}</div>
+                </div>
             </div>
-            <div class="right">
-                <div class="name">{{ device.name }}</div>
-                <div class="type">{{ device.type }}</div>
+            <div class="bottom">
+                <div class="online" :class="{is_online: device.online}">
+                    <span></span> {{ device.online ? 'В сети' : 'Не в сети' }}
+                </div>
+                <div class="signal">
+                    - {{ device.signal }} dBm
+                </div>
             </div>
-        </div>
-        <div class="bottom">
-            <div class="online" :class="{is_online: device.online}">
-                <span></span> {{ device.online ? 'В сети' : 'Не в сети' }}
-            </div>
-            <div class="signal">
-                - {{ device.signal }} dBm
-            </div>
-        </div>
+        </inertia-link>
     </div>
 </template>
 
@@ -43,15 +45,37 @@ export default {
 .device-item {
     margin: 10px;
 
+    &:hover {
+        .bottom {
+            .online {
+                color: #FF5A5A;
+
+                span {
+                    background: #FF5A5A;
+                }
+
+                &.is_online {
+                    color: #C3EF98;
+
+                    span {
+                        background: #C3EF98;
+                    }
+                }
+            }
+        }
+    }
+
     .bottom {
         display: flex;
         justify-content: space-between;
         margin-top: 15px;
         font-size: .9em;
+
         .online {
             color: darkred;
             display: flex;
             align-items: center;
+
             span {
                 width: 10px;
                 height: 10px;
@@ -61,8 +85,10 @@ export default {
                 display: block;
                 margin-right: 5px;
             }
+
             &.is_online {
                 color: green;
+
                 span {
                     background: green;
                 }
