@@ -31,6 +31,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|UserDevice whereSignal($value)
  * @property int $type
  * @method static \Illuminate\Database\Eloquent\Builder|UserDevice whereType($value)
+ * @property string|null $power
+ * @method static \Illuminate\Database\Eloquent\Builder|UserDevice wherePower($value)
  */
 class UserDevice extends Model
 {
@@ -40,8 +42,10 @@ class UserDevice extends Model
         'type' => UserDeviceType::class
     ];
 
-    const TYPE_HEATER = 1;
-    const TYPE_SWITCHER = 2;
+    public const TABLE = 'user_devices';
+
+    public const TYPE_HEATER = 1;
+    public const TYPE_SWITCHER = 2;
 
     public static function getNames()
     {

@@ -1,49 +1,59 @@
 <template>
     <layout :hero="true">
         <template v-slot:hero>
-            <h1 class="title">{{device.name}}</h1>
-            <h2 class="subtitle" :class="{is_online: device.online}">
-                <span></span> {{device.type}}
+            <h1 class="title">{{ device.name }}</h1>
+            <h2 class="subtitle">
+                <div class="list-props">
+                    <div class="prop-item" v-if="device.power">
+                        <div class="name">Мощность: </div>
+                        <div class="prop">{{device.power}} Вт.</div>
+                    </div>
+                </div>
             </h2>
         </template>
-        {{device}}
+        <breadcrumbs :map="breadcrumbs"></breadcrumbs>
+        {{ device }}
     </layout>
 </template>
 
 <script>
 import layout from "../Layout/default";
+import Breadcrumbs from "../Components/menu/breadcrumbs";
+import route from "ziggy-js";
 
 export default {
-    components: {layout},
+    components: {Breadcrumbs, layout},
     props: ['device'],
     data() {
         return {
-
+            breadcrumbs: [
+                {
+                    name: 'Панель управления',
+                    route: 'dashboard.index'
+                },
+                {
+                    name: 'Устройства',
+                    route: 'dashboard.devices'
+                },
+                {
+                    name: this.device.name
+                }
+            ]
         }
     },
-    methods: {
-
-    }
+    methods: {}
 }
 </script>
 
-<style scoped lang="scss">
-    .subtitle {
+<style lang="scss">
+    .prop-item {
         display: flex;
-        align-items: center;
-        span {
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            overflow: hidden;
-            background: darkred;
-            display: block;
+        flex-direction: row;
+        .name {
             margin-right: 10px;
         }
-        &.is_online {
-            span {
-                background: green;
-            }
+        .prop {
+            font-weight: bold;
         }
     }
 </style>
