@@ -29,4 +29,24 @@ class DevicesController extends Controller
             'device' => $device
         ]);
     }
+
+    public function update(UserDevice $device, Request $request)
+    {
+        /** @var User $user */
+        $user = $request->user();
+
+        if ($device->user_id !== $user->id) {
+            return back()->withErrors(['Ошибка сохранения']);
+        }
+
+        if ($request->post('power') > 2000) {
+            return back()->withErrors(['Мощность не может превышать 2кВт']);
+        }
+
+        if ($device->update($request->post())) {
+            return back()->with(['success' => ['Успешно сохранено']]);
+        }
+
+        return back()->withErrors(['Ошибка сохранения']);
+    }
 }

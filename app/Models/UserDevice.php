@@ -42,6 +42,11 @@ class UserDevice extends Model
         'type' => UserDeviceType::class
     ];
 
+    protected $fillable = [
+        'name',
+        'power',
+    ];
+
     public const TABLE = 'user_devices';
 
     public const TYPE_HEATER = 1;

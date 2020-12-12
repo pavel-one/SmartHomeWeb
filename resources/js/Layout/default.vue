@@ -42,6 +42,18 @@ export default {
                 hasIcon: true
             })
         }
+
+        if (typeof(this.$page.props.messages[0]) === 'string') {
+            this.$page.props.messages.forEach(message => {
+                this.$buefy.notification.open({
+                    duration: 5000,
+                    message: message,
+                    position: 'is-top-right',
+                    type: 'is-success',
+                    hasIcon: true
+                })
+            })
+        }
     }
 }
 </script>

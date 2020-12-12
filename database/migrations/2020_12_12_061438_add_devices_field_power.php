@@ -14,7 +14,7 @@ class AddDevicesFieldPower extends Migration
     public function up()
     {
         Schema::table(\App\Models\UserDevice::TABLE, function (Blueprint $table) {
-            $table->decimal('power', 12, 2)->nullable();
+            $table->integer('power')->default(0);
         });
     }
 

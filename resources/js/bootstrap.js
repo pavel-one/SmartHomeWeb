@@ -9,7 +9,6 @@ const axios = require('axios').default;
 import route from 'ziggy-js';
 
 Vue.use(VueMeta, {
-    // optional pluginOptions
     refreshOnceOnNavigation: true
 })
 Vue.use(plugin)
@@ -24,6 +23,20 @@ Vue.mixin({
 });
 Vue.prototype.$route = (...args) => route(...args).url();
 Vue.prototype.$http = axios;
+//Функция тротлинга
+Vue.prototype.$wait = function (callback, limit) {
+    let wait = false;
+
+    return function () {
+        if (!wait) {
+            callback.call();
+            wait = true;
+            setTimeout(function () {
+                wait = false;
+            }, limit);
+        }
+    }
+}
 
 import Layout from './Layout/default'
 new Vue({

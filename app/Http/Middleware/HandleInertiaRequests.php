@@ -44,6 +44,13 @@ class HandleInertiaRequests extends Middleware
 
                 return (object)[];
             },
+            'messages' => function () use ($request) {
+                if ($request->session()->get('success')) {
+                    return $request->session()->get('success');
+                }
+
+                return (object)[];
+            },
             'user' => \Auth::user()
         ]);
     }

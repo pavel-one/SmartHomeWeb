@@ -36,5 +36,7 @@ Route::middleware(IsAuth::class)->prefix('/dashboard')->group(function () {
             ->name('dashboard.api.devices');
         Route::get('{device}', [DevicesController::class, 'show'])
             ->name('dashboard.device');
+        Route::post('{device}', [DevicesController::class, 'update'])
+            ->name('dashboard.device.update');
     });
 });

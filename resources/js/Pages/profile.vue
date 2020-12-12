@@ -4,6 +4,7 @@
             <h1 class="title">Редактировать профиль</h1>
             <h2 class="subtitle">{{$page.props.user.name}}</h2>
         </template>
+        <breadcrumbs :map="breadcrumbs"></breadcrumbs>
         <p class="py-3">Вы можете изменить данные своего профиля или удалить его.</p>
         <form class="my-3" @submit.prevent="submit">
             <b-field :type="errors.name ? 'is-danger' : ''" :message="errors.name" label-position="on-border"
@@ -48,10 +49,11 @@
 
 <script>
 import layout from '../Layout/default'
+import Breadcrumbs from "../Components/menu/breadcrumbs";
 
 export default {
     props: ['title', 'errors'],
-    components: {layout},
+    components: {Breadcrumbs, layout},
     metaInfo() {
         return {
             title: this.title
@@ -65,7 +67,16 @@ export default {
                 name: this.$page.props.user.name,
                 password: '',
                 token: this.$page.props.user.token,
-            }
+            },
+            breadcrumbs: [
+                {
+                    name: 'Панель управления',
+                    route: 'dashboard.index'
+                },
+                {
+                    name: 'Редактирование профиля',
+                },
+            ]
         }
     },
     methods: {
