@@ -32,6 +32,7 @@
                             </b-field>
                             <b-field label="Мощность устройства (Вт)">
                                 <b-numberinput
+                                    :min="0"
                                     :max="2000"
                                     :exponential="true"
                                     type="is-light"

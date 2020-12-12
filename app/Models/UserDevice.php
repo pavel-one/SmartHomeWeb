@@ -33,6 +33,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|UserDevice whereType($value)
  * @property string|null $power
  * @method static \Illuminate\Database\Eloquent\Builder|UserDevice wherePower($value)
+ * @property string $last_check
+ * @method static \Illuminate\Database\Eloquent\Builder|UserDevice whereLastCheck($value)
  */
 class UserDevice extends Model
 {
@@ -66,5 +68,25 @@ class UserDevice extends Model
             self::TYPE_HEATER,
             self::TYPE_SWITCHER,
         ];
+    }
+
+    public function offline(): bool
+    {
+        if ((bool)$this->online === true) {
+            $this->online = false;
+            return $this->save();
+        }
+
+        return true;
+    }
+
+    public function online(): bool
+    {
+        if ((bool) $this->online === false) {
+            $this->online = true;
+            return $this->save();
+        }
+
+        return true;
     }
 }
