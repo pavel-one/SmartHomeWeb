@@ -24,11 +24,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
-
-        $schedule->command('online')->everyMinute();
-
-//        $schedule->command('online')
+        $schedule->command('online:run')->everyMinute();
     }
 
     /**

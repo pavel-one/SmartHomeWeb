@@ -31,7 +31,6 @@ class UserDeviceFactory extends Factory
         $type = $types[rand(0, count($types) - 1)];
 
         return [
-            'user_id' => 1,
             'name' => $names[$type],
             'online' => $this->faker->boolean,
             'mac' => $this->faker->macAddress,

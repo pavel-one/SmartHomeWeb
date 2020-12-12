@@ -15,7 +15,7 @@ class OnlineChecker extends Command
      *
      * @var string
      */
-    protected $signature = 'online';
+    protected $signature = 'online:run';
 
     /**
      * The console command description.
@@ -44,7 +44,7 @@ class OnlineChecker extends Command
         $this->withProgressBar(UserDevice::all(), function ($device) {
 
             /** @var UserDevice $device */
-            $diff = Carbon::createFromTimeString($device->last_check)->diffInSeconds(Carbon::now());
+            $diff = $device->last_check->diffInSeconds(Carbon::now());
 
             \Log::info("TEST SCHEDULE $device->id");
 

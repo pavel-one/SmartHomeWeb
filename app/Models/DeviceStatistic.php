@@ -20,13 +20,21 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|DeviceStatistic whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|DeviceStatistic whereStart($value)
  * @mixin \Eloquent
+ * @property-read \App\Models\UserDevice $device
  */
 class DeviceStatistic extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+
     protected $dates = [
         'start',
         'end'
     ];
+
+    public function device(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(UserDevice::class, 'id', 'device_id');
+    }
 }

@@ -2,8 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\DeviceStatistic;
 use App\Models\User;
 use App\Models\UserDevice;
+use Carbon\Carbon;
 use Database\Factories\UserDeviceFactory;
 use DB;
 use Illuminate\Database\Seeder;
@@ -17,12 +19,23 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->insert([
-            'name' => 'Павел Зарубин',
-            'email' => 'pavel@orendat.ru',
-            'password' => \Hash::make('tipira21')
-        ]);
-         User::factory(10)->create();
-         UserDevice::factory(10)->create();
+         User::factory(10)
+             ->has(
+                 UserDevice::factory()
+                     ->has(
+                         DeviceStatistic::factory()
+                             ->count(100),
+                         'statistic'
+                     )
+                 ->count(10),
+                 'devices'
+             )
+             ->create();
+
+         /** @var User $user */
+         $user = User::whereId(1)->first();
+         $user->email = 'pavel@orendat.ru';
+         $user->password = \Hash::make('tipira21');
+         $user->save();
     }
 }
