@@ -33,6 +33,11 @@ class DeviceStatistic extends Model
         'end'
     ];
 
+    protected $fillable = [
+        'start',
+        'end'
+    ];
+
     public function device(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(UserDevice::class, 'id', 'device_id');

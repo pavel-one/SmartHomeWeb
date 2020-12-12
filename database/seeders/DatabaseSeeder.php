@@ -5,9 +5,7 @@ namespace Database\Seeders;
 use App\Models\DeviceStatistic;
 use App\Models\User;
 use App\Models\UserDevice;
-use Carbon\Carbon;
-use Database\Factories\UserDeviceFactory;
-use DB;
+use Hash;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -35,7 +33,7 @@ class DatabaseSeeder extends Seeder
          /** @var User $user */
          $user = User::whereId(1)->first();
          $user->email = 'pavel@orendat.ru';
-         $user->password = \Hash::make('tipira21');
+         $user->password = Hash::make('tipira21');
          $user->save();
     }
 }

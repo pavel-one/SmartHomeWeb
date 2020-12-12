@@ -22,7 +22,7 @@ class CreateDeviceStatisticsTable extends Migration
                 ->on(UserDevice::TABLE)
                 ->onDelete('cascade');
             $table->dateTime('start')->index();
-            $table->dateTime('end')->index();
+            $table->dateTime('end')->nullable()->index();
         });
     }
 

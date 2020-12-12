@@ -14,7 +14,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton(DeviceService::ServiceName, function () {
+        $this->app->singleton(DeviceService::class, function () {
             return new DeviceService();
         });
     }

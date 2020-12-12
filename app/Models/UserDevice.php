@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Casts\UserDeviceType;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -50,6 +51,9 @@ class UserDevice extends Model
     protected $fillable = [
         'name',
         'power',
+        'type',
+        'mac',
+        'signal'
     ];
 
     protected $dates = [
@@ -89,14 +93,27 @@ class UserDevice extends Model
         return true;
     }
 
-    public function online(): bool
+    public function online(int $signal = 0): bool
     {
-        if ((bool) $this->online === false) {
-            $this->online = true;
-            return $this->save();
+        $statistic = $this->statistic()
+            ->whereNull('end')
+            ->first();
+
+        if (!$statistic) {
+            $statistic = $this->statistic()->create([
+                'start' => Carbon::now()
+            ]);
         }
 
-        return true;
+        if (!$statistic) {
+            return false;
+        }
+
+        $this->last_check = Carbon::now();
+        $this->online = true;
+        $this->signal = $signal;
+
+        return $this->save();
     }
 
     public function statistic(): \Illuminate\Database\Eloquent\Relations\HasMany

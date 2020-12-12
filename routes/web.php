@@ -3,7 +3,6 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DevicesController;
-use App\Http\Controllers\SiteController;
 use App\Http\Middleware\IsAuth;
 use App\Http\Middleware\NonAuth;
 use Illuminate\Support\Facades\Route;
@@ -32,7 +31,7 @@ Route::middleware(IsAuth::class)->prefix('/dashboard')->group(function () {
     Route::prefix('devices')->group(function () {
         Route::get('/', [DevicesController::class, 'index'])->name('dashboard.devices');
         Route::get('get', [DevicesController::class, 'devices'])
-            ->middleware('throttle:60')
+            ->middleware('throttle:120')
             ->name('dashboard.api.devices');
         Route::get('{device}', [DevicesController::class, 'show'])
             ->name('dashboard.device');

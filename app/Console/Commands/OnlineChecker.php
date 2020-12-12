@@ -46,8 +46,6 @@ class OnlineChecker extends Command
             /** @var UserDevice $device */
             $diff = $device->last_check->diffInSeconds(Carbon::now());
 
-            \Log::info("TEST SCHEDULE $device->id");
-
             if ($diff > self::TTL) {
                 $this->info("Устройство id {$device->id} OFFLINE");
                 $device->offline();

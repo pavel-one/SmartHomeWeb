@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\User;
 use App\Models\UserDevice;
 
 class DeviceService
@@ -16,7 +17,7 @@ class DeviceService
      */
     public function deleteTtlStatistic(int $ttlDay = self::TTL_DAY): bool
     {
-
+        return true;
     }
 
     /**
@@ -27,16 +28,58 @@ class DeviceService
      */
     public function trigger(UserDevice $device, bool $online): bool
     {
-
+        return true;
     }
 
     /**
      * Формирует и отдает параметры устройства
-     * @param UserDevice $device
+     * @param string $token
+     * @param string $mac
+     * @param int $type
+     * @param int $signal
      * @return array
      */
-    public function getPropsDevice(UserDevice $device): array
+    public function getPropsDevice(string $token, string $mac, int $type, int $signal): ?array
     {
+        $user = User::whereToken($token)->first();
+        if (!$user) {
+            return null;
+        }
 
+        $device = $this->getOrCreateDevice($user, $mac, $type);
+        if (!$device) {
+            return null;
+        }
+
+        $device->online($signal);
+
+        return [];
+    }
+
+    public function getOrCreateDevice(User $user, string $mac, int $type): ?UserDevice
+    {
+        $device = UserDevice::where([
+            'mac' => $mac,
+            'type' => $type,
+        ]);
+
+        if (!$device) {
+            if (!isset(UserDevice::getNames()[$type])) {
+                return null;
+            }
+
+            $device = $user->devices()->create([
+                'name' => 'Без имени',
+                'type' => $type,
+                'mac' => $mac,
+                'signal' => 0
+            ]);
+        }
+
+        if ($device->user_id !== $user->id) {
+            return null;
+        }
+
+        return $device;
     }
 }
