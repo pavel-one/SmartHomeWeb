@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\DeviceStatistic;
 use App\Models\User;
 use App\Models\UserDevice;
 
@@ -81,5 +82,16 @@ class DeviceService
         }
 
         return $device;
+    }
+
+    public function deviceFactory(int $count = 10): \Illuminate\Database\Eloquent\Factories\Factory
+    {
+        return UserDevice::factory()
+            ->has(
+                DeviceStatistic::factory()
+                    ->count(100),
+                'statistic'
+            )
+            ->count($count);
     }
 }

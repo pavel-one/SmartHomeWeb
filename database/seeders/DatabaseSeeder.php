@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\DeviceStatistic;
 use App\Models\User;
 use App\Models\UserDevice;
+use App\Services\DeviceService;
 use Hash;
 use Illuminate\Database\Seeder;
 
@@ -17,23 +18,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-         User::factory(10)
-             ->has(
-                 UserDevice::factory()
-                     ->has(
-                         DeviceStatistic::factory()
-                             ->count(100),
-                         'statistic'
-                     )
-                 ->count(10),
-                 'devices'
-             )
-             ->create();
+        $service = resolve(DeviceService::class);
 
-         /** @var User $user */
-         $user = User::whereId(1)->first();
-         $user->email = 'pavel@orendat.ru';
-         $user->password = Hash::make('tipira21');
-         $user->save();
+        User::factory(10)
+            ->has(
+                $service->deviceFactory(),
+                'devices'
+            )
+            ->create();
     }
 }
