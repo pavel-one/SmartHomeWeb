@@ -67,7 +67,7 @@ export default {
         this.load();
         setInterval(() => {
             this.load();
-        }, 3100)
+        }, 310000)
     }
 }
 </script>
