@@ -1,11 +1,12 @@
-## Описание
-В разработке
+## Description
+Api service for smart devices.  
+**Service in development**
 
-## Запуск
+## Install
 
-1. `make up && make exec`
-1. `npm install`  
-1. `npm run prod`  
-1. `composer install`  
+1. `touch .env && make init` - generate .env
+1. `make up && make exec` - enter to container
+1. `composer install`
+1. `npm install && npm run prod`
 1. `php artisan migrate`
-1. `php artisan ziggy:generate`
+1. `php artisan admin:create` - for create admin user
