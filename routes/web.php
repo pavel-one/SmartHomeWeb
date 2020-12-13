@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ChartController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DevicesController;
 use App\Http\Middleware\IsAuth;
@@ -37,5 +38,8 @@ Route::middleware(IsAuth::class)->prefix('/dashboard')->group(function () {
             ->name('dashboard.device');
         Route::post('{device}', [DevicesController::class, 'update'])
             ->name('dashboard.device.update');
+
+        Route::get('{device}/chart-work', [ChartController::class, 'workChart']);
+        Route::get('{device}/chart-watt', [ChartController::class, 'wattChart']);
     });
 });

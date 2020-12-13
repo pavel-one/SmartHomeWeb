@@ -12,10 +12,23 @@
             </h2>
         </template>
         <breadcrumbs :map="breadcrumbs"></breadcrumbs>
-        {{ device }}
-        <hr>
-        {{ this.$page.props }}
         <div class="device-dashboard">
+            <div class="columns">
+                <div class="column">
+                    <chart-wrapper url="chart-watt" legend="Рублей">
+                        <h3 class="title">Потребление</h3>
+                        <h4 class="subtitle">Стоимость потребленной электроэнергии от заданной мощности</h4>
+                        <p>Расчет производится в рублях от средней стоимости электроэнергии в размере <b>4 рубля</b> за кВт/ч</p>
+                        <br>
+                    </chart-wrapper>
+                </div>
+                <div class="column">
+                    <chart-wrapper url="chart-work" legend="часов">
+                        <h3 class="title">Работа устройства</h3>
+                        <h4 class="subtitle">Время работы устройства по дням в минутах</h4>
+                    </chart-wrapper>
+                </div>
+            </div>
             <div class="columns">
                 <div class="column">
                     <form method="post" @submit.prevent="saveProps" class="card">
@@ -55,22 +68,7 @@
                     </form>
                 </div>
                 <div class="column">
-                    <div class="column">
-                        <div class="card">
-                            <div class="card-content">
-                                <h3 class="title">Потребление</h3>
-                                <h4 class="subtitle">Потребление электроэнергии от заданной мощности</h4>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="column">
-                        <div class="card">
-                            <div class="card-content">
-                                <h3 class="title">График работы</h3>
-                                <h4 class="subtitle">График работы устройства</h4>
-                            </div>
-                        </div>
-                    </div>
+
                 </div>
             </div>
         </div>
@@ -80,9 +78,10 @@
 <script>
 import layout from "../Layout/default";
 import Breadcrumbs from "../Components/menu/breadcrumbs";
+import ChartWrapper from "../Components/charts/WorkChartWrapper";
 
 export default {
-    components: {Breadcrumbs, layout},
+    components: {ChartWrapper, Breadcrumbs, layout},
     props: ['device', 'title'],
     metaInfo() {
         return {
