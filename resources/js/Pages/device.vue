@@ -83,7 +83,12 @@ import Breadcrumbs from "../Components/menu/breadcrumbs";
 
 export default {
     components: {Breadcrumbs, layout},
-    props: ['device'],
+    props: ['device', 'title'],
+    metaInfo() {
+        return {
+            title: this.title
+        }
+    },
     data() {
         return {
             breadcrumbs: [
@@ -108,7 +113,6 @@ export default {
             this.$inertia.post(this.route('dashboard.device.update', this.device.id), this.deviceEditable);
         }
     },
-    computed: {}
 }
 </script>
 

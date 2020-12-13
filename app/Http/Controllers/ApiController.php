@@ -26,7 +26,7 @@ class ApiController extends Controller
             $request->post('signal'),
         );
 
-        if (!$props) {
+        if ($props === null) {
             return $this->fail('Not valid token or data');
         }
 
