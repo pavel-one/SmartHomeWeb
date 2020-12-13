@@ -32,6 +32,6 @@ class UserDeviceType implements CastsAttributes
      */
     public function set($model, $key, $value, $attributes)
     {
-        return $value;
+        return $model::getNames(true)[$value];
     }
 }

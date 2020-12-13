@@ -68,12 +68,18 @@ class UserDevice extends Model
     public const TYPE_HEATER = 1;
     public const TYPE_SWITCHER = 2;
 
-    public static function getNames()
+    public static function getNames($revert = false)
     {
-        return [
+        $arr = [
             self::TYPE_HEATER => 'Тепловентилятор',
             self::TYPE_SWITCHER => 'Выключатель',
         ];
+
+        if ($revert) {
+            $arr = array_flip($arr);
+        }
+
+        return $arr;
     }
 
     public static function getKeys()

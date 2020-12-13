@@ -63,7 +63,8 @@ class DeviceService
         $device = UserDevice::where([
             'mac' => $mac,
             'type' => $type,
-        ]);
+        ])->first();
+
 
         if (!$device) {
             if (!isset(UserDevice::getNames()[$type])) {
@@ -81,6 +82,7 @@ class DeviceService
         if ($device->user_id !== $user->id) {
             return null;
         }
+
 
         return $device;
     }
