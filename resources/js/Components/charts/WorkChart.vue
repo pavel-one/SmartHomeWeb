@@ -35,7 +35,7 @@ export default {
         }
     },
     methods: {
-        load: function (first = false) {
+        load: function () {
             this.$emit('load');
             this.$http.get(window.location.href+'/'+this.url, {
                 params: {
@@ -64,7 +64,10 @@ export default {
         }
     },
     mounted () {
-        this.load(true);
+        this.load();
+        setInterval(() => {
+            this.load();
+        }, 310)
     }
 }
 </script>
