@@ -137,7 +137,7 @@ class DeviceService
             $times = [];
 
             for ($i = 0; $i < $days; $i++) {
-                $times[Carbon::now()->addDays(-$days + $i + 1)->format('d.m')] = 0;
+                $times[Carbon::now()->addDays(-$days + $i)->format('d.m')] = 0;
             }
 
             $query->each(function ($stat) use (&$times) {
