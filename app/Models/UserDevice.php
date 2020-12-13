@@ -6,6 +6,7 @@ use App\Casts\UserDeviceType;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 
 /**
@@ -85,16 +86,28 @@ class UserDevice extends Model
 
     public function offline(): bool
     {
-        if ((bool)$this->online === true) {
-            $this->online = false;
-            return $this->save();
+        $this->online = false;
+
+        /** @var DeviceStatistic $statistic */
+        $statistic = $this->statistic()
+            ->whereNull('end')
+            ->first();
+
+        if (!$statistic) {
+            return false;
         }
 
-        return true;
+        $statistic->end = Carbon::now();
+
+        return $this->save() && $statistic->save();
     }
 
     public function online(int $signal = 0): bool
     {
+        $this->last_check = Carbon::now();
+        $this->online = true;
+        $this->signal = $signal;
+
         $statistic = $this->statistic()
             ->whereNull('end')
             ->first();
@@ -109,14 +122,10 @@ class UserDevice extends Model
             return false;
         }
 
-        $this->last_check = Carbon::now();
-        $this->online = true;
-        $this->signal = $signal;
-
         return $this->save();
     }
 
-    public function statistic(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function statistic(): HasMany
     {
         return $this->hasMany(DeviceStatistic::class, 'device_id', 'id');
     }
