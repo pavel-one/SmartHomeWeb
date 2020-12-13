@@ -10,3 +10,4 @@ Api service for smart devices.
 1. `npm install && npm run prod`
 1. `php artisan migrate`
 1. `php artisan admin:create` - for create admin user
+1. `php artisan schedule:work > schedule-work.txt &` - start schedule worker
