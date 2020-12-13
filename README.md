@@ -2,6 +2,8 @@
 Api service for smart devices.  
 **Service in development**
 
+![Демонстрация работы](./docs/doc.gif)
+
 ## Install
 
 1. `touch .env && make init` - generate .env
