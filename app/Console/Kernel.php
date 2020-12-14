@@ -24,8 +24,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('online:run')->everyMinute();
-        $schedule->command('online:end')->daily();
+        $schedule->command('online:run')->everyMinute(); //Отбивает онлайн у неактивных дейвайсов
+        $schedule->command('online:end')->daily(); //Завершает все сеансы за сегодня
+        $schedule->command('online:end --hour')->hourly(); //Завершает все сеансы за прошедший час и продолжает новый
     }
 
     /**

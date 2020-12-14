@@ -3,7 +3,14 @@
         <div class="card-content">
             <slot></slot>
             <div class="tabs">
-                <div class="item" :class="{active: item.active}" @click="changeDay(index)" v-for="(item, index) in tabs">За {{item.day}} дней</div>
+                <div class="item"
+                     :class="{active: item.active}"
+                     @click="changeDay(index)"
+                     v-for="(item, index) in tabs">
+                    За {{item.day}}
+                    <span v-if="item.day === 1">день</span>
+                    <span v-else>дней</span>
+                </div>
             </div>
             <work-chart
                 @loadeddata="loaded"
@@ -28,10 +35,14 @@ export default {
         return {
             load: false,
             all: 0,
-            day: 7,
+            day: 1,
             tabs: [
                 {
                     active: true,
+                    day: 1,
+                },
+                {
+                    active: false,
                     day: 7,
                 },
                 {

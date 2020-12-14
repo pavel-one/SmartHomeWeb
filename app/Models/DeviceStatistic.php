@@ -40,6 +40,6 @@ class DeviceStatistic extends Model
 
     public function device(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo(UserDevice::class, 'id', 'device_id');
+        return $this->belongsTo(UserDevice::class, 'device_id', 'id');
     }
 }

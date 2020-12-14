@@ -25,7 +25,8 @@ class ChartController extends Controller
         ]);
 
         $service = resolve(DeviceService::class);
+        $data = $service->getDeviceDaysStatistic($device, $request->get('day'));
 
-        return $service->getDeviceDaysStatisticFromWatt($device, $request->get('day'));
+        return $service->formatFromWattStat($data, $device->power);
     }
 }
