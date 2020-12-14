@@ -191,7 +191,7 @@ class DeviceService
         $keys = [];
         $data = [];
         foreach ($times as $key => $time) {
-            $keys[] = "$key:00 - " . HelperService::formatHour((int)$key + 1) . ':00';
+            $keys[] = "$key:00";
             $data[] = $time;
             $all += $time;
         }
@@ -208,7 +208,7 @@ class DeviceService
     /**
      * Получение статистики онлайна по дням
      * @param UserDevice $device
-     * @param int $days
+     * @param int $day
      * @return array
      */
     private function getDayStat(UserDevice $device, int $days): array
